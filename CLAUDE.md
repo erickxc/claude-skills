@@ -150,6 +150,14 @@ Leia as skills em `~/.claude/commands/` e aplique-as automaticamente baseado no 
 
 ---
 
+### `/brag` (skill externa — latent-spaces/brag, instalada em `~/.claude/skills/`)
+**Ativar quando:**
+- Usuário quer um vídeo curto de lançamento/apresentação sobre um projeto ou funcionalidade
+- Palavras-chave: "/brag", "vídeo de lançamento", "fazer um vídeo sobre", "transformar em vídeo", "mostrar o que construímos"
+- Nunca exibir segredos, IPs, hosts internos ou dados pessoais no vídeo
+
+---
+
 ### `/caveman`
 **Sempre ativo** (regras já embutidas na seção "Skills Sempre Ativas" acima).
 Usar `/caveman lite`, `/caveman ultra` para mudar intensidade.
