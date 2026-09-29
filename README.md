@@ -361,3 +361,35 @@ Cada arquivo `.md` em `~/.claude/commands/` vira um slash command disponível no
 O `CLAUDE.md` configura gatilhos automáticos — o Claude lê o contexto da mensagem e ativa a skill correspondente sem precisar invocar manualmente.
 
 > Skills com contexto específico do ERP ITP (matricula-flow, financeiro-rules, nestjs-patterns, etc.) podem precisar de adaptação para outros projetos.
+
+---
+
+## Skills externas (instaladas em `~/.claude/skills/`)
+
+Skills de terceiros usadas no projeto. Não são copiadas para este repositório: instale da fonte original.
+
+### `brag` / `brag-slim`
+Transforma o projeto atual num **vídeo curto de lançamento** (15–25 s) com música, animação e texto para postar, usando o [Hyperframes](https://hyperframes.heygen.com/). Lê o código direto, sem URL nem prints. Fonte: [latent-spaces/brag](https://github.com/latent-spaces/brag) (MIT). No Opus 5.5 a skill usa a variante `brag-slim`; diga "use the full brag" para o fluxo completo com Hyperframes.
+
+**Instalação**
+```bash
+git clone --depth 1 https://github.com/latent-spaces/brag.git /tmp/brag
+rsync -a --exclude '.DS_Store' /tmp/brag/skills/brag/ ~/.claude/skills/brag/
+rsync -a --exclude '.DS_Store' /tmp/brag/skills/brag-slim/ ~/.claude/skills/brag-slim/
+# fluxo completo: skills do Hyperframes + FFmpeg/FFprobe no PATH
+npx hyperframes skills update hyperframes-core hyperframes-animation hyperframes-creative hyperframes-keyframes hyperframes-cli
+npx hyperframes doctor
+```
+Sem Homebrew, o FFmpeg pode vir dos pacotes npm `ffmpeg-static` e `@ffprobe-installer/ffprobe`, copiados para `~/bin`.
+
+**Ativar automaticamente quando:** "/brag", "vídeo de lançamento", "fazer um vídeo sobre", "transformar em vídeo", "mostrar o que construímos"
+
+**Invocar manualmente:** `/brag`, `/brag --tone cinematic --format vertical`, `/brag use the full brag`
+
+**Exemplos de prompt:**
+```
+/brag um vídeo sobre o catálogo de erros, tom sério
+Faz um vídeo vertical de 20s sobre a nova tela de matrícula
+```
+
+> A trilha sonora embutida (ende.app) tem licença a confirmar antes de redistribuir; os efeitos são Kenney (CC0). Não versione os áudios em repositórios públicos.
